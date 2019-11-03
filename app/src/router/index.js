@@ -8,6 +8,8 @@ import DepoisLogin from '@/components/DepoisLogin'
 Vue.use(Router)
  
 export default new Router({
+  mode:history,
+  hash: false,
   routes: [
     {
       path: '/',

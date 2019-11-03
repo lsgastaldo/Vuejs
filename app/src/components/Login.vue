@@ -3,8 +3,7 @@
         <v-content>
             <v-container
                 fluid
-                fill-height
-                
+                fill-height     
             >
                 <v-layout
                     align-center
@@ -16,8 +15,7 @@
                         md4
                     >
                         <v-card
-                            elevation='1'
-                            
+                            elevation='1' 
                         >
                             <v-toolbar
                                 color="green"
@@ -25,22 +23,26 @@
                                 height="60px"
                                 flat
                             >
-                            <v-toolbar-title> CHUPA </v-toolbar-title>
+                            <v-toolbar-title> Login </v-toolbar-title>
                             <v-spacer></v-spacer>
                             <v-icon dark right>mdi-login</v-icon>
                             </v-toolbar>
                             <v-card-text>
                                 <v-form>
                                     <v-text-field
+                                        v-model="credentials.username"
                                         label="Login"
                                         name="login"
                                         type="text"
+                                        :rules="rules.username"
                                         single-line
                                     ></v-text-field>
-                                    <v-text-field 
+                                    <v-text-field
+                                        v-model="credentials.password"
                                         label="Password"
                                         name="password"
                                         type="password"
+                                        :rules="rules.password"
                                         single-line
                                     ></v-text-field>
                                 </v-form>
@@ -52,6 +54,7 @@
                                     type="text"
                                     block
                                     depressed
+                                    @click="login()"
                                 >Login
                                 </v-btn>
                             </v-card-actions>
@@ -61,7 +64,8 @@
                                     color="red"
                                     block
                                     depressed
-                                >Create account !
+                                    @click="register()"
+                                >Create account!
                                 </v-btn>
                             </v-card-actions>
                             <p class="text-center"><a href="######">Forgot your password?</a></p>
@@ -77,7 +81,7 @@
             color="green"
             class="white--text"
         > 
-            <span>Chupa</span>
+            <span>Instituto Federal Catarinense - Araquari</span>
             <v-spacer></v-spacer>
             <span>&copy; versao 1.0.53.2</span>
         </v-footer>
@@ -85,10 +89,45 @@
 </template>
 
 <script>
-export default {
- name: "Login",
- data:()=>({
+import router from "@/router/";
+import axios from "axios";
 
- })
+ 
+export default {  
+  name: "Login",
+  props: {
+    source: String,
+  }, 
+  data: () => ({
+    credentials: {},
+    errorShow: false,
+    rules: {
+      username: [v => !!v || "Usuário é obrigatório."],
+      password: [
+        v => !!v || "Senha é obrigatória.",
+        v => (v && v.length >= 3) || "A senha deve ser maior que 5 caracteres."
+      ]
+    }
+  }),
+  methods: {
+    login() {
+      if (this.$refs.form.validate()) {
+        axios
+          .post("http://127.0.0.1:80/servidorPHP/index.php/login", this.credentials)
+          .then(res => {
+            this.$session.start();
+            this.$session.set("token", res.data.token);
+            router.push("/home")
+          })
+          .catch(e => { 
+            console.log(e)
+            this.errorShow = true
+          });
+      }
+    },
+    register(){
+        router.push("/login")
+    }
+  }
 };
 </script>
