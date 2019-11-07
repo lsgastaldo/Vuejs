@@ -7,10 +7,28 @@
 </template>
 
 <script>
+import router from "../router";
+
 export default {
- name: "Index",
- data:()=>({
-   
- })
+  name: "Index",
+  data() {
+    return {
+      authenticated: false
+    };
+  },
+  mounted() {
+    this.checkAuthenticated();
+  },
+  methods: {
+    checkAuthenticated() {
+      this.$session.start();
+      if (!this.$session.has("token")) {
+        router.push("/login");
+      } else {
+        this.authenticated = true;
+      }
+    }
+  }
 };
 </script>
+
