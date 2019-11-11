@@ -1,5 +1,5 @@
 <template>
-  <v-app id="booksandbooks">
+  <v-app>
     <ToolBar @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer"></ToolBar>
     <SideMenu ref="drawer"></SideMenu>
     <v-content>

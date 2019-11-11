@@ -21,11 +21,8 @@ export default {
   },
   methods: {
     checkAuthenticated() {
-      this.$session.start();
-      if (!this.$session.has("token")) {
-        router.push("/login");
-      } else {
-        this.authenticated = true;
+      if(!this.$session.has("token")){
+        router.push("login")
       }
     }
   }

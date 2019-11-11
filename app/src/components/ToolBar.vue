@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-export</v-icon>
+        <v-icon @click="logout()">mdi-export</v-icon>
       </v-btn>
     </v-toolbar>
   </div>
@@ -20,6 +20,7 @@
 
 <script>
 import {eventBus} from "../main"
+import router from "../router"
 
 export default {
   name: 'ToolBar',
@@ -27,6 +28,9 @@ export default {
   methods: {
     updateAppDrawer() {
       eventBus.$emit('updateAppDrawer')
+    },
+    logout(){
+      router.push("/logout")
     }
   }
 }

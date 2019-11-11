@@ -3,10 +3,12 @@ import Router from 'vue-router'
  
 import Index from '@/components/Index'
 import Login from '@/components/Auth/Login'
-import DepoisLogin from '@/components/DepoisLogin'
+import Logout from '@/components/Auth/Logout'
 import Register from "@/components/Auth/Register"
-import Parameters from "@/components/Parameters"
- 
+import ViewParameters from "@/components/Aquecimento/ViewParameters"
+import RegisterParameters from "@/components/Aquecimento/RegisterParameters"
+import ChangeParameter from "@/components/Aquecimento/ChangeParameter"
+
 Vue.use(Router)
  
 export default new Router({
@@ -23,9 +25,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/depoisLogin',
-      name: 'DepoisLogin',
-      component: DepoisLogin
+      path: '/logout',
+      name: 'Logout',
+      component: Logout
     },
     {
       path: '/register',
@@ -33,11 +35,20 @@ export default new Router({
       component: Register
     },
     {
-      path: '/parameters',
+      path: '/viewParameters',
       name: 'Parameters',
-      component: Parameters
+      component: ViewParameters
+    },
+    {
+      path: '/changeParameter/:id',
+      name: 'ChangeParameter',
+      component: ChangeParameter
+    },
+    {
+      path: '/registerParameters',
+      name: 'RegisterParameters',
+      component: RegisterParameters
     }
-
   ]
 })
 

@@ -2,7 +2,7 @@
     <v-app>
         <v-content>
             <v-layout align-center justify-center mt-10>
-                    <v-overlay :value="overlay">
+                    <v-overlay >
                         <v-card light>
                             <v-toolbar color="#4781FF" class="white--text" height="60px" width="500px" flat>
                             <v-toolbar-title> Login </v-toolbar-title>
@@ -10,7 +10,7 @@
                             <v-icon dark right>mdi-login</v-icon>
                             </v-toolbar>
                             <v-card-text>
-                                <v-form>
+                                <v-form ref="form">
                                     <v-text-field
                                         v-model="credentials.username"
                                         label="Login"
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import router from "@/router/";
+import router from "../../router";
 import axios from "axios";
 
  
@@ -85,9 +85,12 @@ export default {
         axios
           .post("http://127.0.0.1:80/servidorPHP/index.php/login", this.credentials)
           .then(res => {
+            console.log(res )
             this.$session.start();
             this.$session.set("token", res.data.token);
-            router.push("/home")
+            this.$authenticated = true;
+            console.log(this.$authenticated)
+            router.push("/")
           })
           .catch(e => { 
             console.log(e)
