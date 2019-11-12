@@ -1,12 +1,14 @@
 <template>
-  <v-app>
-    <ToolBar @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer"></ToolBar>
-    <SideMenu ref="drawer"></SideMenu>
-    <v-content>
-      <router-view></router-view>
-    </v-content>
-    <FooterBar></FooterBar>
-  </v-app>
+	<v-app>
+		<ToolBar @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer"></ToolBar>
+		<SideMenu ref="drawer"></SideMenu>
+
+			<v-content>
+				<router-view></router-view>
+			</v-content>
+
+		<FooterBar></FooterBar>
+  	</v-app>
 </template>
 
 <script>

@@ -2,7 +2,7 @@
   <div>
     <v-toolbar
       dark
-      prominent
+      extended
       src="../assets/banner2.jpg"
     >
       

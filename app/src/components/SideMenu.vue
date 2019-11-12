@@ -2,7 +2,7 @@
     <v-navigation-drawer
       v-model="drawer"
       absolute
-      bottom
+      clipped
       temporary
     >
     <template v-slot:prepend>
