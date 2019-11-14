@@ -8,8 +8,11 @@ import Register from "@/components/Auth/Register"
 import ViewParameters from "@/components/Aquecimento/ViewParameters"
 import RegisterParameters from "@/components/Aquecimento/RegisterParameters"
 import ChangeParameter from "@/components/Aquecimento/ChangeParameter"
-import NewBaia from "@/components/Aquecimento/NewBaia"
-import ShowBaias from "@/components/Aquecimento/ShowBaias"
+import NewBay from "@/components/Aquecimento/NewBay"
+import ShowBay from "@/components/Aquecimento/ViewBay"
+import NewProject from "@/components/NewProject"
+import AlterProject from "@/components/AlterProject"
+import ViewProject from "@/components/ViewProject"
 
 Vue.use(Router)
  
@@ -37,6 +40,21 @@ export default new Router({
       component: Register
     },
     {
+      path: '/newproject',
+      name: 'NewProject',
+      component: NewProject
+    },
+    {
+      path: '/alterproject/:id',
+      name: 'AlterProject',
+      component: AlterProject
+    },
+    {
+      path: '/viewproject/:id',
+      name: 'ViewProject',
+      component: ViewProject
+    },
+    {
       path: '/viewParameters',
       name: 'Parameters',
       component: ViewParameters
@@ -52,14 +70,14 @@ export default new Router({
       component: RegisterParameters
     },
     {
-      path: '/newBaia',
-      name: 'NewBaia',
-      component: NewBaia
+      path: '/newbay',
+      name: 'NewBay',
+      component: NewBay
     },
     {
-      path: '/showBaias',
-      name: 'ShowBaias',
-      component: ShowBaias
+      path: '/showbay',
+      name: 'ViewBay',
+      component: ShowBay
     }
   ]
 })

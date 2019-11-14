@@ -37,10 +37,8 @@
                                     prepend-icon="mdi-account-question"
 
                                     v-model="information.userName"
-                                    @change="validateName"
                                     :counter="10"
                                     :rules="rules.nameRules"
-                                    :error="!nameValid"
                                     required
                                 >
                                 </v-text-field>
@@ -67,7 +65,7 @@
                                 </v-text-field>
 
                                 <v-radio-group v-model="information.idTipoUsuario" :rules="rules.radioRules">
-                                    <v-radio v-for="role in roles" :key="role.IdTipoUsuario" :value="role.IdTipoUsuario" :label="role.Descricao"></v-radio>
+                                    <v-radio v-for="role in roles" :key="role.idTipoUsuario" :value="role.idTipoUsuario" :label="role.descricao"></v-radio>
                                 </v-radio-group>
 
                                 </v-form>
@@ -148,23 +146,23 @@ export default {
         })
     },
     methods: {
-        async validateName() {
-            let url = `http://127.0.0.1:80/servidorPHP/index.php/verificarNome?name=${this.information.userName}`
-            let result = await axios.get(url)
-            this.nameValid = result.data.code == 1
-        },
+        // async validateName() {
+        //     let url = this.$baseURL + `/verificarNome?name=${this.information.userName}`
+        //     let result = await axios.get(url)
+        //     this.nameValid = result.data.code == 1
+        // },
         submit(){
             if(this.validate()){
                 axios
-                .post("http://127.0.0.1:80/servidorPHP/index.php/cadastrar", this.information)
+                .post(this.$baseURL + "/cadastrarUsuario", this.information)
                 .then(res => {
-                    console.log(res);
-                    return true;
+                    console.log(res)
+                    router.push("/login")
                 })
                 .catch(e => {
                     this.errorShow = true
                     console.log(e)
-                    return false;
+                    return false;   
                 })
             }
         },

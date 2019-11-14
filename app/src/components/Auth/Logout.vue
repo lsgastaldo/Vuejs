@@ -8,20 +8,22 @@ import router from "@/router/";
 
 export default { 
   created () {
-    if (this.$session.has('token')) {
+    if (this.$session.has("token")) {
       axios
-        .post("http://127.0.0.1:80/servidorPHP/index.php/logout", {"token":this.$session.get("token")})
+        .post(this.$baseURL + "/logout", {"token":this.$session.get("token")})
         .then(res => {
+          console.log(res)
           this.$session.remove("token")
           this.$session.destroy()
           router.push("/login")
         })
         .catch(e => {
-          
+          console.log(e)
           this.errorShow = true
         });
+    }else{
+      router.push("/login")
     }
-    router.push("/login")
   }
 }
 </script>

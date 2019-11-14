@@ -24,9 +24,9 @@
                                 width="100%" 
                                 flat
                             >
-                                <v-toolbar-title>Cadastrando uma nova Baia</v-toolbar-title>
+                                <v-toolbar-title>Cadastrar Projeto</v-toolbar-title>
                                 <v-spacer></v-spacer>
-                                <v-icon dark right>mdi-home-group</v-icon>
+                                <v-icon dark right>mdi-folder-plus</v-icon>
                             </v-toolbar>
                             
                             <v-card-text>
@@ -35,50 +35,42 @@
                                     v-model="valid"
                                 >   
                                     <v-text-field
-                                        label="Numero da Baia"
-                                        type="number"
-                                        prepend-icon="mdi-home-floor-3"
+                                        label="Nome do Projeto"
+                                        type="text"
+                                        prepend-icon="mdi-account-badge"
 
-                                        v-model="information.numeroBaia"
-                                        :rules="rules.numeroBaiaRules"
+                                        v-model="information.projectName"
+                                        :rules="rules.nameProjectRules"
                                     >
                                     </v-text-field>
                                     <v-text-field
-                                        label="Matriz"
-                                        type="number"
-                                        prepend-icon="mdi-pig"
-
-                                        v-model="information.numeroBaia"
-                                        :rules="rules.numeroBaiaRules"
-                                    >
-                                    </v-text-field>
-                                    <v-text-field
-                                        label="Data Prevista Nasc.Porquinhos"
+                                        label="Data Inicio"
                                         type="date"
                                         prepend-icon="mdi-calendar-month"
 
-                                        v-model="information.dataNasc"
-                                        :rules="rules.dataNascRules"
+                                        v-model="information.startDate"
+                                        :rules="rules.startDateRules"
                                     >
                                     </v-text-field>
-                                    <v-text-field
-                                        label="Ordem do Parto"
-                                        type="number"
-                                        prepend-icon="mdi-human-pregnant"
-
-                                        v-molde="information.quantidadePorquinhos"
-                                        :rules="rules.quantidadePorquinhosRules"
+                                    
+                                    <v-autocomplete
+                                        label="Colaboradores"
+                                        v-model="colaboratorsName[i-1]"
+                                        prepend-icon="mdi-account-plus"
+                                        :items="users"
+                                        :search-input.sync="model[i-1]"
+                                        @keyup="getNames(i-1)"
+                                        v-for="i in numberColaborators"
+                                        :key="i"
+                                        cache-items
+                                        hide-no-data
                                     >
-                                    </v-text-field>
-                                    <v-text-field
-                                        label="Nome Controlador"
-                                        type="text"
-                                        prepend-icon="mdi-chip"
-
-                                        v-model="information.nomeControlador"
-                                        :rules="rules.nomeControladorRules"
-                                    >
-                                    </v-text-field>
+                                    </v-autocomplete>
+                                    <v-card-actions  chips dark>
+                                        <v-spacer></v-spacer>
+                                        <v-chip @click="lessColaborator()"><v-icon>mdi-minus</v-icon></v-chip>
+                                        <v-chip @click="plusColaborator()"><v-icon>mdi-plus</v-icon></v-chip>
+                                    </v-card-actions>
                                 </v-form>
                             </v-card-text>
                                 <v-divider></v-divider>
@@ -87,8 +79,7 @@
                                     class="white--text"
                                     color="#00208F"
                                     block
-                                    elevation="2"
-                                    
+                                    elevation="2"                                    
                                     type="text"
                                     @click="submit"
                                     :disabled="!valid"
@@ -102,7 +93,6 @@
                                     block
                                     outlined
                                     elevation="2"
-
                                     type="text"
                                     @click="reset"
                                 >Limpar
@@ -124,30 +114,47 @@ export default {
     data:() => ({
         information: {},
         valid: true,
+        users :[],
+        numberColaborators:1,
+        model:[],
+        colaboratorsName:[],
         rules:{
-            numeroBaiaRules:[
+            nameProjectRules:[
                 v => !!v || "Preenchimento obrigatório",
             ],
-            dataNascRules:[
-                v => !!v || "Preenchimento obrigatório"
+            startDateRules:[
+                v => !!v || "Preenchimento obrigatório",
             ],
-            quantidadePorquinhosRules:[
-                v => !!v || "Preenchimento obrigatório"
+            colaboratorRules:[
+                v => !!v || "Preenchimento obrigatório",
             ],
-            nomeControladorRules:[
-                v => !!v || "Preenchimento obrigatório"
-            ]
-        }
+        },
     }),
 
     methods: {
+        async getNames(i) {
+            let url = this.$baseURL + `/buscarNomes`
+            let data = {"token": this.$session.get("token"), "name":this.model[i]}
+            let result = await axios.post(url, data)
+            if(result != false){
+                this.users = result.data
+            }
+        },
+        plusColaborator(){
+            this.numberColaborators++;
+        },
+        lessColaborator(){
+            this.numberColaborators--;
+        },
         submit(){
             if(this.validate()){
+                this.information.names = this.colaboratorsName
+                this.information.token = this.$session.get("token")  
                 axios
-                .post(this.$baseURL + "/cadastrarBaia", this.information)
+                .post(this.$baseURL + "/cadastrarProjeto", this.information)
                 .then(res => {
-                    console.log(res)
-                    router.push("/showBaias")
+                        console.log(res.data)
+                    router.push("/")
                 })
                 .catch(e => {
                     this.errorShow = true
@@ -167,6 +174,6 @@ export default {
         resetValidation () {
             this.$refs.form.resetValidation()
         }
-    }    
+    },   
 }
 </script>

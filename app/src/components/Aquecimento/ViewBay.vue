@@ -1,20 +1,19 @@
 <template>
-    <v-app>
-        <v-content>
-            <v-container
-                fluid
-                fill-height     
-            >
-                <v-layout
-                    align-center
-                    justify-center
-                >
-                    <v-flex
-                        xs12
-                        md4
-                        sm8
-                    >
-                        <v-card>
+  <v-container
+        fluid
+    >
+        <v-toolbar
+          dark
+        >
+            <v-toolbar-title>Projetos Coordenados</v-toolbar-title>
+        </v-toolbar>
+        <v-col
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+        >
+           <v-card>
                             <v-toolbar 
                                     color="orange"
                                     class="white--text" 
@@ -83,11 +82,8 @@
                                 </v-list>
                             </v-card-text>
                         </v-card>
-                    </v-flex>
-                </v-layout>
-            </v-container>
-        </v-content>
-    </v-app>
+            </v-col>
+  </v-container>
 </template>
 
 <script>

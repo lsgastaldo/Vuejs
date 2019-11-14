@@ -27,7 +27,7 @@
 								<v-icon dark right>mdi-login</v-icon>
 							</v-toolbar>
 							<v-card-text>
-								<v-form>
+								<v-form ref="form">
 									<v-text-field
 										label="Login"
 										name="login"
@@ -112,9 +112,10 @@ export default {
         axios
           .post(this.$baseURL + "/login", this.credentials)
           .then(res => {
+			console.log(res)
             this.$session.start();
             this.$session.set("token", res.data.token);
-            router.push("/home")
+            router.push("/")
           })
           .catch(e => { 
             console.log(e)
