@@ -24,7 +24,7 @@
                                 width="100%" 
                                 flat
                             >
-                                <v-toolbar-title>Cadastrando uma nova Baia</v-toolbar-title>
+                                <v-toolbar-title>Alterar Baia</v-toolbar-title>
                                 <v-spacer></v-spacer>
                                 <v-icon dark right>mdi-home-group</v-icon>
                             </v-toolbar>
@@ -35,30 +35,12 @@
                                     v-model="valid"
                                 >   
                                     <v-text-field
-                                        label="Numero da Baia"
-                                        type="number"
-                                        prepend-icon="mdi-home-floor-3"
-
-                                        v-model="information.numeroBaia"
-                                        :rules="rules.numeroBaiaRules"
-                                    >
-                                    </v-text-field>
-                                    <v-text-field
-                                        label="Matriz"
+                                        label="Número da Matriz"
                                         type="number"
                                         prepend-icon="mdi-pig"
 
                                         v-model="information.numeroMatriz"
-                                        :rules="rules.numeroBaiaRules"
-                                    >
-                                    </v-text-field>
-                                    <v-text-field
-                                        label="Parto Previsto"
-                                        type="date"
-                                        prepend-icon="mdi-calendar-month"
-
-                                        v-model="information.partoPrevisto"
-                                        :rules="rules.dataNascRules"
+                                        :rules="rules.valueRule"
                                     >
                                     </v-text-field>
                                     <v-text-field
@@ -67,7 +49,24 @@
                                         prepend-icon="mdi-human-pregnant"
 
                                         v-model="information.ordemParto"
-                                        :rules="rules.quantidadePorquinhosRules"
+                                        :rules="rules.valueRule"
+                                    >
+                                    </v-text-field>
+                                    <v-text-field
+                                        label="Parto Previsto"
+                                        type="date"
+                                        prepend-icon="mdi-calendar-month"
+
+                                        v-model="information.partoPrevisto"
+                                        :rules="rules.valueRule"
+                                    >
+                                    </v-text-field>
+                                    <v-text-field
+                                        label="Parto Efetivo"
+                                        type="date"
+                                        prepend-icon="mdi-calendar-month"
+
+                                        v-model="information.partoEfetivo"
                                     >
                                     </v-text-field>
                                     <v-text-field
@@ -76,7 +75,38 @@
                                         prepend-icon="mdi-chip"
 
                                         v-model="information.controlador"
-                                        :rules="rules.nomeControladorRules"
+                                    >
+                                    </v-text-field>
+                                    <!-- <v-text-field
+                                        label="Número da Baia"
+                                        type="number"
+                                        prepend-icon="mdi-home-floor-3"
+
+                                        v-model="information.numeroBaia"
+                                    > -->
+                                    </v-text-field>
+                                    <v-text-field
+                                        label="Leitões Vivos"
+                                        type="number"
+                                        prepend-icon="mdi-pig-variant"
+
+                                        v-model="information.leitoesVivos"
+                                    >
+                                    </v-text-field>
+                                    <v-text-field
+                                        label="Leitões Mortos"
+                                        type="number"
+                                        prepend-icon="mdi-skull"
+
+                                        v-model="information.leitoesMortos"
+                                    >
+                                    </v-text-field>
+                                    <v-text-field
+                                        label="Data de Desmame"
+                                        type="date"
+                                        prepend-icon="mdi-calendar-month"
+
+                                        v-model="information.dataDesmame"
                                     >
                                     </v-text-field>
                                 </v-form>
@@ -92,7 +122,7 @@
                                     type="text"
                                     @click="submit"
                                     :disabled="!valid"
-                                >Cadastrar
+                                >Alterar
                                 </v-btn>
                             </v-card-actions>
                             <v-card-actions>
@@ -125,40 +155,44 @@ export default {
         information: {},
         valid: true,
         rules:{
-            numeroBaiaRules:[
+            valueRule:[
                 v => !!v || "Preenchimento obrigatório",
             ],
-            dataNascRules:[
-                v => !!v || "Preenchimento obrigatório"
-            ],
-            quantidadePorquinhosRules:[
-                v => !!v || "Preenchimento obrigatório"
-            ],
-            nomeControladorRules:[
-                v => !!v || "Preenchimento obrigatório"
-            ]
         }
     }),
     mounted(){
-        this.checkAuthenticated()
+        this.checkAuthenticated();
+        this.getBay();
     },
     methods: {
         checkAuthenticated() {
             if(!this.$session.has("token")){
                 router.push("/login")
-            }
+        }
+        },
+        getBay(){
+            axios
+                .post(this.$baseURL + "/buscarBaia", {"token":this.$session.get("token"), "id":this.$route.params.id})
+                .then(res=>{
+                    console.log(res)
+                    this.information = res.data
+                })
+                .catch(e=>{
+                    console.log(e)
+                })
         },
         submit(){
+            this.information.token = this.$session.get("token")  
             if(this.validate()){
-                this.information.token = this.$session.get("token")
                 axios
-                .post(this.$baseURL + "/cadastrarBaia", this.information)
+                .post(this.$baseURL + "/alterarBaia", this.information)
                 .then(res => {
                     console.log(res)
-                    router.push("/viewbay")
+                    router.push("/viewBay")
                 })
                 .catch(e => {
                     this.errorShow = true
+                    console.log(e)
                     return false;
                 })
             }

@@ -12,6 +12,12 @@
           flat
         >
           <v-toolbar-title>Parametros Baias de Aquecimento</v-toolbar-title>
+            <v-btn
+              outlined
+              to="/newparameters"
+            >
+              <v-icon>mdi-thermometer-plus</v-icon>
+            </v-btn>
             <v-spacer></v-spacer>
             <v-flex mt-6 xs3 sm2 md2 lg2>
                 <v-select
@@ -38,51 +44,60 @@
             lg="3"
           >
             <v-card>
-              <v-card-title class="subheading font-weight-bold">Semana: {{ item.Semanas }}</v-card-title>
-
+              <v-toolbar
+                flat
+                color="#00208F" 
+                class="white--text"
+                height="60px"
+                width="100%"                 
+              >
+                <v-card-title class="subheading font-weight-bold">
+                  Semana: {{ item.semana }}
+                </v-card-title>
+              </v-toolbar>
               <v-divider></v-divider>
 
               <v-list dense>
                 <v-list-item>
                   <v-list-item-content>Temperatura Mínima Boiler:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TemperaturaBoilerMIN }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.temperaturaBoilerMIN }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>Temperatura Máxima Boiler:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TemperaturaBoilerMAX }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.temperaturaBoilerMAX }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>Temperatura Mínima Piso:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TemperaturaPisoMIN }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.temperaturaPisoMIN }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>Temperatura Máxima Piso:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TemperaturaPisoMAX }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.temperaturaPisoMAX }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>Temperatura Mínima Ambiente:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TemperaturaAmbienteMIN }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.temperaturaAmbienteMIN }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>Temperatura Máxima Ambiente:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TemperaturaAmbienteMAX }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.temperaturaAmbienteMAX }}</v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-content>Tempo de Espera Bomba:</v-list-item-content>
-                  <v-list-item-content class="align-end">{{ item.TempoEsperaBomba }}</v-list-item-content>
+                  <v-list-item-content class="align-end">{{ item.tempoEsperaBomba }}</v-list-item-content>
                 </v-list-item>
               </v-list>
               <v-divider></v-divider>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                  <v-btn @click="change(item.IdParametros)" color="#00208F" class="white--text">Alterar</v-btn>
-                  <v-btn @click="del(item.IdParametros)" color="orange darken-4" class="white--text">Excluir</v-btn>
+                  <v-btn @click="change(item.idParametro)" color="#00208F" class="white--text">Alterar</v-btn>
+                  <v-btn @click="del(item.idParametro)" color="orange darken-4" class="white--text">Excluir</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -123,11 +138,14 @@ methods: {
         }
     },
     del(id){
+      console.log(id)
       axios
         .post(this.$baseURL + '/deletarParametro', {"token":this.$session.get("token"), "idParametro":id})
         .then(res=>{
-            this.items = res.data
+            console.log(res)
+            this.choiceParams();
         }).catch(e=>{
+            console.log(res)
             router.push("/viewParameters")
         })
     },

@@ -12,14 +12,13 @@
                         sm8
                     >
                         <v-card light>
-                            <v-toolbar 
-                                color="#00208F" 
+                            <v-toolbar color="#00208F" 
                                 class="white--text"
                                 height="60px"
                                 width="100%" 
                                 flat
                             >
-                            <v-toolbar-title>Alterar Parâmetro</v-toolbar-title>
+                            <v-toolbar-title>Inserindo Novos Parâmetros</v-toolbar-title>
                             <v-spacer></v-spacer>
                             <v-icon dark right>mdi-thermometer</v-icon>
                             </v-toolbar>
@@ -72,7 +71,7 @@
                                     </v-text-field>
 
                                     <v-text-field
-                                        v-model="information.semana"
+                                        v-model="information.semanas"
                                         type="number"
                                         label="Semana Referente"
                                         required
@@ -92,8 +91,7 @@
                                         v-model="information.idBaia"
                                         required
                                     >
-                                        <v-radio value="1" label="Baia 1"></v-radio>
-                                        <v-radio value="2" label="Baia 2"></v-radio>
+                                        <v-radio v-for="bay in bays" :key="bay.idBaia" :value="bay.idBaia" :label="'Baia' + bay.numeroBaia"></v-radio>
                                     </v-radio-group>            
                                     
 
@@ -103,7 +101,7 @@
                                         class="mr-4"
                                         @click="submit"
                                     >
-                                        Alterar
+                                        Enviar  
                                     </v-btn>
 
                                     <v-btn
@@ -131,35 +129,26 @@ import router from '../../router';
 export default {
 data: () => ({
     information: {},
+    bays:{},
     valid: true
 }),
 mounted(){
-    this.checkAuthenticated();
-    this.getParameter()
+    this.checkAuthenticated()
+    this.getBay()
 },
 methods: {
     checkAuthenticated() {
       if(!this.$session.has("token")){
         router.push("/login")
       }
-    },  
-    getParameter(){
-        axios
-        .post(this.$baseURL + '/buscarParametro', {"token":this.$session.get("token"), "idParametro":this.$route.params.id})
-        .then(res=>{
-            this.information = res.data
-        })
-        .catch(e=>{
-            console.log(e)
-        })
     },
     submit(){
+        this.information.token = this.$session.get("token")
         if(this.validate()){
-            this.information.token = this.$session.get("token")
             axios
-            .post(this.$baseURL + "/alterarParametro", this.information)
+            .post(this.$baseURL + "/cadastrarParametros", this.information)
             .then(res => {
-                router.push("/viewParameters")
+                router.push("/viewparameters")
             })
             .catch(e => {
                 this.errorShow = true
@@ -178,6 +167,15 @@ methods: {
     resetValidation () {
         this.$refs.form.resetValidation()
     },
+    getBay(){
+        axios
+            .post(this.$baseURL + '/buscarTotalBaias', {"token":this.$session.get("token")})
+            .then(res=>{
+                console.log(res.data)
+                this.bays = res.data
+            })
+
+    }
 },
 }
 </script>

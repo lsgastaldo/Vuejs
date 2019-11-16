@@ -12,10 +12,9 @@ export default {
       axios
         .post(this.$baseURL + "/logout", {"token":this.$session.get("token")})
         .then(res => {
-          console.log(res)
           this.$session.remove("token")
           this.$session.destroy()
-          router.push("/login")
+          window.location.href = "http://localhost:8080/"
         })
         .catch(e => {
           console.log(e)

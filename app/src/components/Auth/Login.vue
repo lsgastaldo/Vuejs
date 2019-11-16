@@ -16,7 +16,7 @@
 					>
 						<v-card light>
 							<v-toolbar 
-								color="teal lighten-2" 
+								color="#00208F" 
 								class="white--text" 
 								height="60px" 
 								width="100%"
@@ -112,13 +112,12 @@ export default {
         axios
           .post(this.$baseURL + "/login", this.credentials)
           .then(res => {
-			console.log(res)
+			  console.log(res)
             this.$session.start();
             this.$session.set("token", res.data.token);
-            router.push("/")
+            window.location.href = "http://localhost:8080/"
           })
           .catch(e => { 
-            console.log(e)
             this.errorShow = true
           });
       }
