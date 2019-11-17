@@ -7,29 +7,37 @@
       <template v-slot:header>
         <v-toolbar
           class="mb-2"
-          color="orange darken-4"
+          color="#00208F"
           dark
           flat
         >
           <v-toolbar-title>Parametros Baias de Aquecimento</v-toolbar-title>
-            <v-btn
-              outlined
-              to="/newparameters"
-            >
-              <v-icon>mdi-thermometer-plus</v-icon>
-            </v-btn>
             <v-spacer></v-spacer>
-            <v-flex mt-6 xs3 sm2 md2 lg2>
+
+            <v-toolbar-items>
+              <v-divider
+              class="mx-2"
+              vertical
+              ></v-divider>
+                <v-btn 
+                  to="/newparameters"
+                  text="Inserir"
+                ><v-icon >mdi-thermometer-plus</v-icon></v-btn>
+              <v-divider
+                class="mx-2"
+                vertical
+              ></v-divider>
+              <v-flex mt-3>
                 <v-select
-                :items="opcoes"
-                v-model="choice"
-                label="Baias"
-                dense
-                outlined
-                mt-5
-                @change="choiceParams()"
+                  :items="opcoes"
+                  v-model="choice"
+                  label="Baias"
+                  dense
+                  outlined
+                  @change="choiceParams()"
                 ></v-select>
-            </v-flex>
+          </v-flex>
+          </v-toolbar-items>
         </v-toolbar>
       </template>
 
@@ -97,7 +105,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                   <v-btn @click="change(item.idParametro)" color="#00208F" class="white--text">Alterar</v-btn>
-                  <v-btn @click="del(item.idParametro)" color="orange darken-4" class="white--text">Excluir</v-btn>
+                  <v-btn @click="del(item.idParametro)" color="orange" class="white--text">Excluir</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>

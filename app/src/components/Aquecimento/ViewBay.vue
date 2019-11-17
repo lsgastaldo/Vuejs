@@ -1,11 +1,11 @@
 <template>
     <v-app>
         <v-container
-        fluid
+            fluid
         >
             <v-toolbar
                 class="mb-2"
-                color="orange darken-4"
+                color="#00208F"
                 dark
                 flat
             >
@@ -147,7 +147,7 @@
                             <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn @click="change(baia.idBaia)" color="#00208F" class="white--text">Alterar</v-btn>
-                            <!-- <v-btn @click="del(baia.idBaia)" color="orange darken-4" class="white--text">Excluir</v-btn> -->
+                            <!-- <v-btn @click="del(baia.idBaia)" color="orange" class="white--text">Excluir</v-btn> -->
                         </v-card-actions>
                         </v-card>
                     </v-col>

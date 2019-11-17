@@ -35,11 +35,11 @@ export default new Router({
       name: 'Logout',
       component: Logout
     },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register
-    },
+    // {
+    //   path: '/register',
+    //   name: 'Register',
+    //   component: Register
+    // },
     // {
     //   path: '/newproject',
     //   name: 'NewProject',
@@ -56,12 +56,12 @@ export default new Router({
     //   component: ViewProject
     // },
     {
-      path: '/viewParameters',
+      path: '/viewparameters',
       name: 'ViewParameters',
       component: ViewParameters
     },
     {
-      path: '/changeParameter/:id',
+      path: '/changeparameter/:id',
       name: 'ChangeParameter',
       component: ChangeParameter
     },
@@ -70,11 +70,11 @@ export default new Router({
       name: 'NewParameters',
       component: NewParameters
     },
-    {
-      path: '/newbay',
-      name: 'NewBay',
-      component: NewBay
-    },
+    // {
+    //   path: '/newbay',
+    //   name: 'NewBay',
+    //   component: NewBay
+    // },
     {
       path: '/viewbay',
       name: 'ViewBay',

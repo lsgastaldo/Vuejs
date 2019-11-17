@@ -3,11 +3,11 @@
     <v-toolbar
       dark
       extended
-      src="../assets/banner2.jpg"
+      src="../assets/bannerDahora.png"
     >
       
     <v-app-bar-nav-icon  @click.stop="$emit('toggle-drawer')"></v-app-bar-nav-icon>
-      <v-toolbar-title>Sistema de Aquisição de Dados - </v-toolbar-title>
+      <v-toolbar-title class="bold headline">Sistema de Aquisição de Dados</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

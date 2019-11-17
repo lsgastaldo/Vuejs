@@ -33,6 +33,7 @@
                                         type="number"
                                         label="Temperatura Ambiente Máxima"
                                         required
+                                        prepend-icon="mdi-thermometer-plus"
                                     >
                                     </v-text-field>
                                     <v-text-field
@@ -40,6 +41,7 @@
                                         type="number"
                                         label="Temperatura Ambiente Mínima"
                                         required
+                                        prepend-icon="mdi-thermometer-minus"
                                     >
                                     </v-text-field>
                                     <v-text-field
@@ -47,6 +49,7 @@
                                         type="number"
                                         label="Temperatura Piso Máxima"
                                         required
+                                        prepend-icon="mdi-thermometer-plus"
                                     >
                                     </v-text-field>
                                     <v-text-field
@@ -54,13 +57,7 @@
                                         type="number"
                                         label="Temperatura Piso Mínima"
                                         required
-                                    >
-                                    </v-text-field>
-                                    <v-text-field
-                                        v-model="information.temperaturaBoilerMIN"
-                                        type="number"
-                                        label="Temperatura Boiler Mínima"
-                                        required
+                                        prepend-icon="mdi-thermometer-minus"
                                     >
                                     </v-text-field>
                                     <v-text-field
@@ -68,22 +65,31 @@
                                         type="number"
                                         label="Temperatura Boiler Máxima"
                                         required
+                                        prepend-icon="mdi-thermometer-plus"
                                     >
                                     </v-text-field>
-
+                                    <v-text-field
+                                        v-model="information.temperaturaBoilerMIN"
+                                        type="number"
+                                        label="Temperatura Boiler Mínima"
+                                        required
+                                        prepend-icon="mdi-thermometer-minus"
+                                    >
+                                    </v-text-field>
                                     <v-text-field
                                         v-model="information.semana"
                                         type="number"
                                         label="Semana Referente"
                                         required
+                                        prependIcon="mdi-calendar-month"
                                     >
                                     </v-text-field>
-
                                     <v-text-field
                                         v-model="information.tempoEsperaBomba"
                                         type="number"
                                         label="Tempo de Espera da Bomba (minutos)"
                                         required
+                                        prepend-icon="mdi-clock-outline"
                                     >
                                     </v-text-field>
 
@@ -97,22 +103,29 @@
                                     </v-radio-group>            
                                     
 
+                                    <v-card-actions>
                                     <v-btn
                                         :disabled="!valid"
-                                        color="success"
-                                        class="mr-4"
+                                        color="#00208F"
+                                        class="white--text"
                                         @click="submit"
+                                        block
                                     >
-                                        Alterar
+                                        Enviar  
                                     </v-btn>
-
+                                    </v-card-actions>
+                                    <v-card-actions>
                                     <v-btn
-                                        color="error"
-                                        class="mr-4"
+                                        color="blue"
+                                        outlined
+                                        elevation="2"
+                                        class="white--text"
                                         @click="reset"
+                                        block
                                     >
                                         Limpar
                                     </v-btn>
+                                    </v-card-actions>
                                 </v-form>
                             </v-card-text>
                         </v-card>

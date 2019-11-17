@@ -16,7 +16,7 @@
                     >
                         <v-card>
                             <v-toolbar 
-                                color="teal lighten-2"
+                                color="#00208F"
                                 class="white--text" 
                                 height="60px" 
                                 width="100%" 

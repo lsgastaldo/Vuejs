@@ -1,8 +1,7 @@
 <template>
     <v-navigation-drawer
       v-model="drawer"
-      absolute
-      clipped
+      app
       temporary
     >
     <template v-slot:prepend>

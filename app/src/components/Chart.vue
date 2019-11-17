@@ -38,6 +38,10 @@ import axios from 'axios'
               },
               ticks: {
                 beginAtZero: true,
+                stepSize: 1,
+                suggestedMin: 0,
+                suggestedMax: 60,
+                maxTicksLimit: 30,
                 callback: function(value, index, values) {
                         return value + ' °C';
                 }
@@ -53,6 +57,7 @@ import axios from 'axios'
                 lineHeight: 2,
                 fontColor: 'black',
                 fontSize: 14,
+
               },
               type:"time",
               // // distribution:'linear',
