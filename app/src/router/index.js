@@ -35,11 +35,11 @@ export default new Router({
       name: 'Logout',
       component: Logout
     },
-    // {
-    //   path: '/register',
-    //   name: 'Register',
-    //   component: Register
-    // },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
     // {
     //   path: '/newproject',
     //   name: 'NewProject',

@@ -34,7 +34,7 @@
                                 >
                                 <v-text-field
                                     label="Nome Usuário"
-                                    prepend-icon="mdi-account-question"
+                                    prepend-icon="mdi-account"
 
                                     v-model="information.userName"
                                     :counter="10"
