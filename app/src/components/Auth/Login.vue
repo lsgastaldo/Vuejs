@@ -22,14 +22,14 @@
 								width="100%"
 								flat
 							>
-								<v-toolbar-title display-3> Login </v-toolbar-title>
+								<v-toolbar-title display-3>SAD</v-toolbar-title>
 									<v-spacer></v-spacer>
 								<v-icon dark right>mdi-login</v-icon>
 							</v-toolbar>
 							<v-card-text>
 								<v-form ref="form">
 									<v-text-field
-										label="Login"
+										label="Usuario"
 										name="login"
 										type="text"
 										single-line
@@ -40,7 +40,7 @@
 										required
 									></v-text-field>
 									<v-text-field
-										label="Password"
+										label="Senha"
 										name="password"
 										prepend-icon="mdi-lock"
 										single-line
@@ -62,7 +62,7 @@
 									elevation="2"
 
 									@click="login()"
-								>Login
+								>Entrar
 								</v-btn>
 							</v-card-actions>
 							<v-card-actions>
@@ -73,7 +73,7 @@
 									elevation="2"
 
 									@click="register()"
-								>Create account
+								>Cadastrar
 								</v-btn>
 							</v-card-actions>
 							<!-- <v-card-text >Forgot your password</v-card-text> -->
@@ -106,16 +106,19 @@ export default {
       ]
     }
   }),
+  mounted(){
+	this.checkAuthenticated()
+  },
   methods: {
     login() {
       if (this.$refs.form.validate()) {
         axios
           .post(this.$baseURL + "/login", this.credentials)
           .then(res => {
-			  console.log(res)
+			// console.log(res)
             this.$session.start();
             this.$session.set("token", res.data.token);
-            window.location.href = "http://localhost:8080/"
+            window.location.href = "https://sad.fabricadesoftware.ifc.edu.br/"
           })
           .catch(e => { 
             this.errorShow = true
@@ -124,7 +127,13 @@ export default {
     },
     register(){
         router.push("/register")
-    }
+	},
+	checkAuthenticated() {
+      if(this.$session.has("token")){
+        router.push("/")
+      }
+      this.authenticated = true
+    },
   }
 };
 </script>
