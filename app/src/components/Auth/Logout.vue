@@ -14,10 +14,10 @@ export default {
         .then(res => {
           this.$session.remove("token")
           this.$session.destroy()
-          window.location.href = "http://localhost:8080/"
+          window.location.href = "https://sad.fabricadesoftware.ifc.edu.br/"
         })
         .catch(e => {
-          console.log(e)
+          // console.log(e)
           this.errorShow = true
         });
     }else{

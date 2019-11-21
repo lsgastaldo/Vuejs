@@ -26,7 +26,7 @@
                     :key="baia.idBaia"
                 >
                     <v-card 
-                            flat
+                        elvevation="1"
                     >
                             <v-toolbar 
                                     color="orange"

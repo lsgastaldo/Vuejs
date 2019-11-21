@@ -4,16 +4,16 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Auth/Login'
 import Logout from '@/components/Auth/Logout'
-import Register from "@/components/Auth/Register"
+// import Register from "@/components/Auth/Register"
 import ViewParameters from "@/components/Aquecimento/ViewParameters"
 import NewParameters from "@/components/Aquecimento/NewParameters"
 import ChangeParameter from "@/components/Aquecimento/ChangeParameter"
-import NewBay from "@/components/Aquecimento/NewBay"
+// import NewBay from "@/components/Aquecimento/NewBay"
 import ViewBay from "@/components/Aquecimento/ViewBay"
 import ChangeBay from "@/components/Aquecimento/ChangeBay"
-import NewProject from "@/components/NewProject"
-import AlterProject from "@/components/AlterProject"
-import ViewProject from "@/components/ViewProject"
+// import NewProject from "@/components/NewProject"
+// import AlterProject from "@/components/AlterProject"
+// import ViewProject from "@/components/ViewProject"
 
 Vue.use(Router)
  
