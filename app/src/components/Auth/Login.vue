@@ -72,7 +72,7 @@
 									block
 									elevation="2"
 
-									@click="register()"
+								
 								>Cadastrar
 								</v-btn>
 							</v-card-actions>
@@ -126,7 +126,7 @@ export default {
       }
     },
     register(){
-        router.push("/register")
+		router.push("/register")
 	},
 	checkAuthenticated() {
       if(this.$session.has("token")){
