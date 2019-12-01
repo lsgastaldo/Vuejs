@@ -188,7 +188,7 @@ export default {
                 .post(this.$baseURL + "/alterarBaia", this.information)
                 .then(res => {
                     console.log(res)
-                    router.push("/viewBay")
+                    router.push("/viewBox")
                 })
                 .catch(e => {
                     this.errorShow = true

@@ -8,9 +8,9 @@ import Logout from '@/components/Auth/Logout'
 import ViewParameters from "@/components/Aquecimento/ViewParameters"
 import NewParameters from "@/components/Aquecimento/NewParameters"
 import ChangeParameter from "@/components/Aquecimento/ChangeParameter"
-// import NewBay from "@/components/Aquecimento/NewBay"
-import ViewBay from "@/components/Aquecimento/ViewBay"
-import ChangeBay from "@/components/Aquecimento/ChangeBay"
+// import NewBox from "@/components/Aquecimento/NewBox"
+import ViewBox from "@/components/Aquecimento/ViewBox"
+import ChangeBox from "@/components/Aquecimento/ChangeBox"
 // import NewProject from "@/components/NewProject"
 // import AlterProject from "@/components/AlterProject"
 // import ViewProject from "@/components/ViewProject"
@@ -71,19 +71,19 @@ export default new Router({
       component: NewParameters
     },
     // {
-    //   path: '/newbay',
-    //   name: 'NewBay',
-    //   component: NewBay
+    //   path: '/newbox',
+    //   name: 'NewBox',
+    //   component: NewBox
     // },
     {
-      path: '/viewbay',
-      name: 'ViewBay',
-      component: ViewBay
+      path: '/viewbox',
+      name: 'ViewBox',
+      component: ViewBox
     },
     {
-      path: '/changebay/:id',
-      name: 'ChangeBay',
-      component: ChangeBay
+      path: '/changebox/:id',
+      name: 'ChangeBox',
+      component: ChangeBox
     }
   ]
 })

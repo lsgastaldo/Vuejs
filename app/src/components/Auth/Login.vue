@@ -79,10 +79,10 @@
 							<!-- <v-card-text >Forgot your password</v-card-text> -->
 						</v-card>
 					</v-flex>
-            	</v-layout>
+				</v-layout>
 			</v-container>
-        </v-content>
-    </v-app>
+		</v-content>
+	</v-app>
 </template>
 
 <script>
@@ -120,9 +120,9 @@ export default {
             this.$session.set("token", res.data.token);
             window.location.href = "https://sad.fabricadesoftware.ifc.edu.br/"
           })
-          .catch(e => { 
+          .catch( 
             this.errorShow = true
-          });
+          );
       }
     },
     register(){

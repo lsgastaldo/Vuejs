@@ -80,15 +80,14 @@ export default {
               lineHeight: 2,
               fontColor: 'black',
               fontSize: 14,
-
             },
             ticks: {
               // beginAtZero: true,
               stepSize: 0.5,
               suggestedMin: 30,
-              suggestedMax: 40,
+              suggestedMax: 35,
               // maxTicksLimit: 20,
-              callback: function(value, index, values) {
+              callback: function(value) {
                 return value + '°C';
               }
             },
@@ -109,7 +108,7 @@ export default {
   methods:{
     getSensorReadings(){
         axios
-          .post(this.$baseURL + '/buscarMedicoes', {"token":this.$session.get("token")})
+          .post(this.$baseURL + '/buscarMedicoesBaia2', {"token":this.$session.get("token")})
             .then(res=>{
               this.makeDataSets(res.data)
             })
@@ -139,11 +138,11 @@ export default {
     updateChart(){
       this.interval = setInterval(() => {
         axios
-            .post(this.$baseURL + '/buscarMedicoes', {"token":this.$session.get("token")})
-              .then(res=>{
+            .post(this.$baseURL + '/buscarMedicoesBaia2', {"token":this.$session.get("token")})
+              .then(res=>{              
                 this.makeDataSets(res.data)
               })
-      }, 30000)
+      }, 120000)
     },
     beforeDestroy(){
       clearInterval(this.interval)
