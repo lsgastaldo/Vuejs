@@ -13,7 +13,7 @@
                 <v-spacer></v-spacer>
                 <v-btn
                     outlined
-                    to="/newbay"
+                    to="/newbox"
                 >
                     <v-icon>mdi-home-plus</v-icon>
                 </v-btn>
@@ -194,7 +194,7 @@ export default {
                 })
         },
         change(id){
-            router.push("/changeBay/"+id)
+            router.push("/changeBox/"+id)
         }
     }
 }
