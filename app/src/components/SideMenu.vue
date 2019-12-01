@@ -46,7 +46,7 @@
       items: {
         "1":[
           { title: 'Home', icon: 'mdi-home-city', route:'/'},
-          { title: 'Baias', icon: 'mdi-home-map-marker', route:'/viewbay'},
+          { title: 'Baias', icon: 'mdi-home-map-marker', route:'/viewbox'},
           { title: 'Parâmetros', icon:'mdi-thermometer', route:'/viewparameters'},
           { title: 'Logout', icon:'mdi-export', route:'/logout'}
         ],
